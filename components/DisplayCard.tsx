@@ -42,7 +42,7 @@ const DisplayCard = ({
         <CardHeader>
           <div className="flex justify-between items-start">
             <div className="flex gap-4 flex-wrap">
-              {session?.user?.image ? (
+              {post?.author?.image ? (
                 <Image
                   src={session?.user?.image as string}
                   alt="avatar"

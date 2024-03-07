@@ -15,7 +15,6 @@ import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
 import { Card } from "@/components/ui/card";
 
 const Navbar = () => {
@@ -50,8 +49,8 @@ const Navbar = () => {
               </Button>
               <Link href="">
                 {session?.user?.image ? (
-                  <HoverCard>
-                    <HoverCardTrigger>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger>
                       <Image
                         src={session?.user?.image as string}
                         alt="avatar"
@@ -59,9 +58,30 @@ const Navbar = () => {
                         height={32}
                         className="rounded-full object-contain"
                       />
-                    </HoverCardTrigger>
-                    <HoverCardContent>2233</HoverCardContent>
-                  </HoverCard>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <Card className="mt-3 mr-2 space-y-1 flex-end flex-col">
+                        <Link href="/home">
+                          <p className="w-full py-2 px-4 hover:bg-[#faead6]">
+                            {session.user.name}的主页
+                          </p>
+                        </Link>
+                        <div className="flex sm:hidden flex-col space-y-1 w-full">
+                          <Link href="/createPostPage">
+                            <p className="w-full py-2 px-4 hover:bg-[#faead6]">
+                              新建一句
+                            </p>
+                          </Link>
+                          <p
+                            className="w-full py-2 px-4 hover:bg-[#faead6]"
+                            onClick={() => signOut({ callbackUrl: "/" })}
+                          >
+                            退出账号
+                          </p>
+                        </div>
+                      </Card>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 ) : (
                   <DropdownMenu>
                     <DropdownMenuTrigger>
@@ -75,13 +95,12 @@ const Navbar = () => {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                       <Card className="mt-3 mr-2 space-y-1 flex-end flex-col">
-                        <p
-                          onClick={() => router.push("/home")}
-                          className="w-full py-2 px-4 hover:bg-[#faead6]"
-                        >
-                          {session.user.name}的主页
-                        </p>
-                        <div className="flex md:hidden flex-col space-y-1 w-full">
+                        <Link href="/home">
+                          <p className="w-full py-2 px-4 hover:bg-[#faead6]">
+                            {session.user.name}的主页
+                          </p>
+                        </Link>
+                        <div className="flex sm:hidden flex-col space-y-1 w-full">
                           <Link href="/createPostPage">
                             <p className="w-full py-2 px-4 hover:bg-[#faead6]">
                               新建一句
@@ -115,13 +134,40 @@ const Navbar = () => {
           {session?.user ? (
             <div className="flex">
               {session?.user?.image ? (
-                <Image
-                  src={session?.user?.image as string}
-                  alt="avatar"
-                  width={32}
-                  height={32}
-                  className="rounded-full"
-                />
+                <DropdownMenu>
+                  <DropdownMenuTrigger>
+                    <Image
+                      src={session?.user?.image as string}
+                      alt="avatar"
+                      width={32}
+                      height={32}
+                      className="rounded-full"
+                    />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <Card className="mt-3 mr-2 space-y-1 flex-end flex-col">
+                      <p
+                        onClick={() => router.push("/home")}
+                        className="w-full py-2 px-4 hover:bg-[#faead6]"
+                      >
+                        {session.user.name}的主页
+                      </p>
+                      <div className="flex sm:hidden flex-col w-full">
+                        <Link href="/createPostPage">
+                          <p className="w-full py-2 px-4 hover:bg-[#faead6]">
+                            新建一句
+                          </p>
+                        </Link>
+                        <p
+                          className="w-full py-2 px-4 hover:bg-[#faead6]"
+                          onClick={() => signOut({ callbackUrl: "/" })}
+                        >
+                          退出账号
+                        </p>
+                      </div>
+                    </Card>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               ) : (
                 <DropdownMenu>
                   <DropdownMenuTrigger>
@@ -141,7 +187,7 @@ const Navbar = () => {
                       >
                         {session.user.name}的主页
                       </p>
-                      <div className="flex md:hidden flex-col w-full">
+                      <div className="flex sm:hidden flex-col w-full">
                         <Link href="/createPostPage">
                           <p className="w-full py-2 px-4 hover:bg-[#faead6]">
                             新建一句

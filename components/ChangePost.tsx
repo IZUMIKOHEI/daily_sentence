@@ -29,7 +29,7 @@ const ChangePost = ({
 }: ChangePostProps) => {
   return (
     <div className="w-full flex-center">
-      <div className="max-container md:py-8 md:px-16 rounded-2xl mt-8 mb-58">
+      <div className="max-container py-16 md:py-8 md:px-16 rounded-2xl mt-8 mb-58">
         <Card className="w-[320px] sm:w-[400px] md:w-[450px] flex-center flex-col shadow-lg">
           <CardHeader>
             <CardTitle className="text-xl tracking-wider">{title}</CardTitle>
@@ -49,7 +49,7 @@ const ChangePost = ({
                       <Textarea
                         {...field}
                         disabled={isSubmitting}
-                        className="h-10 md:h-40"
+                        className="h-20 md:h-40"
                       />
                     </FormControl>
                   </FormItem>
