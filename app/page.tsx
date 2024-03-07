@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { postType } from "@/types/postType";
 import SearchBar from "@/components/SearchBar";
-import { useForm } from "react-hook-form";
+import { usePathname } from "next/navigation";
 
 export default function Home() {
   const [allPosts, setAllPosts] = useState<postType[] | undefined>([]);
@@ -13,20 +13,23 @@ export default function Home() {
   const [searchedPosts, setSearchedPosts] = useState<postType[] | undefined>(
     []
   );
+  const pathname = usePathname();
 
   useEffect(() => {
-    axios.get("/api/handlePosts").then((response) => {
-      setAllPosts(response.data);
-      console.log('Home Page')
-    });
-  }, []);
+    if (pathname === "/") {
+      axios.get("/api/handlePosts").then((response) => {
+        setAllPosts(response.data);
+      });
+    }
+  });
 
   const filterPosts = (searchText: string) => {
     const regex = new RegExp(searchText, "i");
     return allPosts?.filter(
       (item) =>
         regex.test(item.author.name) ||
-        regex.test(item.tag) || regex.test(item.content)
+        regex.test(item.tag) ||
+        regex.test(item.content)
     );
   };
 
@@ -60,13 +63,21 @@ export default function Home() {
       {searchText ? (
         <div className="container flex-start mt-16 gap-16 flex-1 flex-wrap">
           {searchedPosts?.map((post) => (
-            <DisplayCard key={post.id} post={post} handleTagClick={handleTagClick} />
+            <DisplayCard
+              key={post.id}
+              post={post}
+              handleTagClick={handleTagClick}
+            />
           ))}
         </div>
       ) : (
         <div className="container flex-center xl:flex-start mt-16 gap-16 flex-1 flex-wrap">
           {allPosts?.map((post) => (
-            <DisplayCard key={post.id} post={post} handleTagClick={handleTagClick} />
+            <DisplayCard
+              key={post.id}
+              post={post}
+              handleTagClick={handleTagClick}
+            />
           ))}
         </div>
       )}

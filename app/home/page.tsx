@@ -27,12 +27,8 @@ const HomePage = () => {
     }
   }, [session?.user.id, router]);
 
-  console.log(myPosts);
-
   const handleEdit = async (post: postType) => {
     router.push(`/updatePost?id=${post.id}`);
-    // router.push('/');
-    // router.back();
   };
 
   const handleDelete = async (post: postType) => {
