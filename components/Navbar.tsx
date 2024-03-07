@@ -1,11 +1,6 @@
 "use client";
 
 import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@radix-ui/react-hover-card";
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
