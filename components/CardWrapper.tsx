@@ -39,13 +39,15 @@ const CardWrapper = ({
             <div className="text-sm">{OAuthLabel}</div>
             <FaGithub
               size={28}
-              onClick={() => signIn("github")}
+              onClick={() => signIn("github", { callbackUrl: "/" })}
               className="cursor-pointer"
             />
           </div>
           <hr className="w-full  " />
           <div className="mt-4 text-sm flex gap-2">
-            <span className="text-slate-400 tracking-wide">{descLinkLabel}</span>
+            <span className="text-slate-400 tracking-wide">
+              {descLinkLabel}
+            </span>
             <Link
               href={linkHref}
               className=" text-blue-400 hover:underline hover:opacity-70 cursor-pointer"
