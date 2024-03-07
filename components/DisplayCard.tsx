@@ -44,7 +44,7 @@ const DisplayCard = ({
             <div className="flex gap-4 flex-wrap">
               {post?.author?.image ? (
                 <Image
-                  src={session?.user?.image as string}
+                  src={post?.author?.image as string}
                   alt="avatar"
                   width={40}
                   height={40}
