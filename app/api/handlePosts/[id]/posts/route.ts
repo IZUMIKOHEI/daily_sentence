@@ -6,11 +6,17 @@ export const GET = async (
   { params }: { params: { id: string } }
 ) => {
   try {
-    const data = await db.post.findMany({
+    const response = await db.post.findMany({
       where: { authorId: params.id },
       include: { author: true },
     });
-    return NextResponse.json(data, { status: 200 });
+
+    const resWithoutPassword = response.map((data) => {
+      data.author.hashedPassword = null;
+      return data;
+    });
+
+    return NextResponse.json(resWithoutPassword, { status: 200 });
   } catch (error) {
     return NextResponse.json("查询出现问题，抛出异常", { status: 500 });
   }

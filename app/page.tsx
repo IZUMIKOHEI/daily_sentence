@@ -19,6 +19,7 @@ export default function Home() {
     if (pathname === "/") {
       axios.get("/api/handlePosts").then((response) => {
         setAllPosts(response.data);
+        console.log(response.data)
       });
     }
   }, [pathname]);

@@ -9,7 +9,12 @@ export const GET = async () => {
       },
     });
 
-    return NextResponse.json(response, { status: 200 });
+    const resWithoutPassword = response.map((data) => {
+      data.author.hashedPassword = null
+      return data;
+    })
+
+    return NextResponse.json(resWithoutPassword, { status: 200 });
   } catch (error) {
     return NextResponse.json("获取内容失败", { status: 500 });
   }
