@@ -21,7 +21,7 @@ export default function Home() {
         setAllPosts(response.data);
       });
     }
-  });
+  }, [pathname]);
 
   const filterPosts = (searchText: string) => {
     const regex = new RegExp(searchText, "i");
