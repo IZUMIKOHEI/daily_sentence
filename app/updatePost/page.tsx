@@ -8,11 +8,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import axios from "axios";
-import { useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 
-const UpdatePostPage = () => {
+const UpdatePost = () => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const postId = useSearchParams().get("id");
@@ -61,4 +60,4 @@ const UpdatePostPage = () => {
   );
 };
 
-export default UpdatePostPage;
+export default UpdatePost;
